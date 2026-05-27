@@ -1,0 +1,47 @@
+<app-header
+  [activeLanguage]="activeLanguage"
+  logoVariant="blue"
+  (languageChange)="setLanguage($event)"
+></app-header>
+
+<main class="privacy-page">
+  <div class="privacy-page__circle privacy-page__circle--large" aria-hidden="true"></div>
+  <div class="privacy-page__circle privacy-page__circle--small" aria-hidden="true"></div>
+
+  <section class="privacy-page__content">
+    <p class="privacy-page__eyebrow">
+      @if (activeLanguage === 'de') {
+        Datenschutz
+      } @else {
+        Data protection
+      }
+    </p>
+
+    <h1>
+      @if (activeLanguage === 'de') {
+        <span>Datenschutz-</span>
+        <span>erklärung</span>
+      } @else {
+        <span>{{ pageTitle[activeLanguage] }}</span>
+      }
+    </h1>
+
+    <p class="privacy-page__intro">
+      {{ intro[activeLanguage] }}
+    </p>
+
+    <div class="privacy-page__sections">
+      @for (section of sections; track section.title.en) {
+        <article class="privacy-section">
+          <h2>{{ section.title[activeLanguage] }}</h2>
+
+          @for (paragraph of section.paragraphs; track paragraph.en) {
+            <p>{{ paragraph[activeLanguage] }}</p>
+          }
+        </article>
+      }
+    </div>
+  </section>
+</main>
+
+<app-footer [activeLanguage]="activeLanguage"></app-footer>

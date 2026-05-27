@@ -1,0 +1,59 @@
+<footer class="footer">
+  <a
+    class="footer__logo"
+    href="/"
+    [attr.aria-label]="labels.homeAria"
+    (click)="navigateToTop('/', $event)"
+  >
+    <img
+      src="/img/profile-icon.png"
+      alt="Logo von Roger Friebus"
+      class="footer__logo-image"
+    />
+  </a>
+
+  <p class="footer__copyright">{{ labels.copyright }}</p>
+
+  <div class="footer__socials" [attr.aria-label]="labels.socialsAria">
+    <a
+      href="https://github.com/rogerfriebus"
+      [attr.aria-label]="labels.github"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="/img/social/github.png" alt="" aria-hidden="true" />
+    </a>
+
+    <a
+      href="mailto:roger.friebus@gmx.net"
+      [attr.aria-label]="labels.email"
+    >
+      <img src="/img/social/mail.png" alt="" aria-hidden="true" />
+    </a>
+
+    <a
+      href="https://www.linkedin.com/in/roger-friebus-993913378"
+      [attr.aria-label]="labels.linkedin"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="/img/social/linkedin.png" alt="" aria-hidden="true" />
+    </a>
+  </div>
+
+  <nav class="footer__legal" [attr.aria-label]="labels.legalAria">
+    <a
+      href="/legal-notice"
+      (click)="navigateToTop('/legal-notice', $event)"
+    >
+      {{ labels.legalNotice }}
+    </a>
+
+    <a
+      href="/privacy-policy"
+      (click)="navigateToTop('/privacy-policy', $event)"
+    >
+      {{ labels.privacyPolicy }}
+    </a>
+  </nav>
+</footer>

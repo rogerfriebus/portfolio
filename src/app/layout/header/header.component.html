@@ -1,0 +1,82 @@
+<header
+  class="header"
+  [class.header--menu-open]="isMenuOpen"
+  [class.header--blue-logo]="logoVariant === 'blue'"
+>
+  <a class="header__logo" routerLink="/" aria-label="Zur Startseite" (click)="closeMenu()">
+    <img
+      src="/img/profile-icon.png"
+      alt="Logo von Roger Friebus"
+      class="header__logo-image"
+    />
+  </a>
+
+  <nav class="header__nav" aria-label="Hauptnavigation">
+    <a href="/#about">{{ labels.about }}</a>
+    <a href="/#skills">{{ labels.skills }}</a>
+    <a href="/#projects">{{ labels.projects }}</a>
+  </nav>
+
+  <div class="header__language" aria-label="Sprachauswahl">
+    <button
+      type="button"
+      [class.is-active]="activeLanguage === 'de'"
+      (click)="setLanguage('de')"
+    >
+      DE
+    </button>
+
+    <span>/</span>
+
+    <button
+      type="button"
+      [class.is-active]="activeLanguage === 'en'"
+      (click)="setLanguage('en')"
+    >
+      EN
+    </button>
+  </div>
+
+  <button
+    class="header__burger"
+    type="button"
+    [attr.aria-label]="isMenuOpen ? labels.menuClose : labels.menuOpen"
+    [attr.aria-expanded]="isMenuOpen"
+    (click)="toggleMenu()"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  @if (isMenuOpen) {
+    <div class="mobile-menu">
+      <nav class="mobile-menu__nav" aria-label="Mobile Hauptnavigation">
+        <a href="/#about" (click)="closeMenu()">{{ labels.about }}</a>
+        <a href="/#skills" (click)="closeMenu()">{{ labels.skills }}</a>
+        <a href="/#projects" (click)="closeMenu()">{{ labels.projects }}</a>
+        <a href="/#contact" (click)="closeMenu()">{{ labels.contact }}</a>
+      </nav>
+
+      <div class="mobile-menu__language" aria-label="Mobile Sprachauswahl">
+        <button
+          type="button"
+          [class.is-active]="activeLanguage === 'de'"
+          (click)="setLanguage('de')"
+        >
+          DE
+        </button>
+
+        <span>/</span>
+
+        <button
+          type="button"
+          [class.is-active]="activeLanguage === 'en'"
+          (click)="setLanguage('en')"
+        >
+          EN
+        </button>
+      </div>
+    </div>
+  }
+</header>

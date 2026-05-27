@@ -1,0 +1,40 @@
+<app-header
+  [activeLanguage]="activeLanguage"
+  logoVariant="blue"
+  (languageChange)="setLanguage($event)"
+></app-header>
+
+<main class="legal-page">
+  <div class="legal-page__circle legal-page__circle--large" aria-hidden="true"></div>
+  <div class="legal-page__circle legal-page__circle--small" aria-hidden="true"></div>
+
+  <section class="legal-page__content">
+    <p class="legal-page__eyebrow">
+      @if (activeLanguage === 'de') {
+        Rechtliche Informationen
+      } @else {
+        Legal information
+      }
+    </p>
+
+    <h1>{{ pageTitle[activeLanguage] }}</h1>
+
+    <p class="legal-page__intro">
+      {{ intro[activeLanguage] }}
+    </p>
+
+    <div class="legal-page__sections">
+      @for (section of sections; track section.title.en) {
+        <article class="legal-section">
+          <h2>{{ section.title[activeLanguage] }}</h2>
+
+          @for (paragraph of section.paragraphs; track paragraph.en) {
+            <p>{{ paragraph[activeLanguage] }}</p>
+          }
+        </article>
+      }
+    </div>
+  </section>
+</main>
+
+<app-footer [activeLanguage]="activeLanguage"></app-footer>

@@ -1,0 +1,334 @@
+<app-header
+  [activeLanguage]="activeLanguage"
+  (languageChange)="setLanguage($event)"
+></app-header>
+
+<main>
+  <section class="hero" id="hero">
+    <div class="hero__visual">
+      <div class="hero__circle" aria-hidden="true"></div>
+
+      <img
+        class="hero__portrait"
+        src="/img/roger-profile.png"
+        alt="Portrait von Roger"
+      />
+    </div>
+
+    <div class="hero__headline">
+      <p>{{ content.hero.intro[activeLanguage] }}</p>
+      <h1>{{ content.hero.title[activeLanguage] }}</h1>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>{{ content.hero.scroll[activeLanguage] }}</span>
+      <div></div>
+    </div>
+
+    <div class="hero__socials" aria-label="Berufliche Profile">
+      <a
+        href="https://github.com/rogerfriebus"
+        aria-label="GitHub-Profil von Roger Friebus öffnen"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="/img/hero-social/github.png" alt="" aria-hidden="true" />
+      </a>
+
+      <a
+        href="mailto:roger.friebus@gmx.net"
+        aria-label="E-Mail an Roger Friebus schreiben"
+      >
+        <img src="/img/hero-social/mail.png" alt="" aria-hidden="true" />
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/roger-friebus-993913378"
+        aria-label="LinkedIn-Profil von Roger Friebus öffnen"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="/img/hero-social/linkedin.png" alt="" aria-hidden="true" />
+      </a>
+    </div>
+
+    <div class="hero__bottom-circle hero__bottom-circle--large" aria-hidden="true"></div>
+    <div class="hero__bottom-circle hero__bottom-circle--small" aria-hidden="true"></div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about__inner">
+      <div class="about__left">
+        <h2 class="section-title about__title">
+          @if (activeLanguage === 'de') {
+            <span>Lass uns</span>
+            <span class="about__title-desktop">zusammenarbeiten</span>
+            <span class="about__title-mobile">zusammen-</span>
+            <span class="about__title-mobile">arbeiten</span>
+          } @else {
+            <span>{{ content.about.titleLineOne[activeLanguage] }}</span>
+            <span>{{ content.about.titleLineTwo[activeLanguage] }}</span>
+          }
+        </h2>
+
+        <div class="about__facts">
+          <p class="about__facts-title">{{ content.about.factsTitle[activeLanguage] }}</p>
+
+          <div class="about__fact">
+            <img src="/img/about/location.png" alt="" aria-hidden="true" />
+            <span>{{ content.about.location[activeLanguage] }}</span>
+          </div>
+
+          <div class="about__fact">
+            <img src="/img/about/remote.png" alt="" aria-hidden="true" />
+            <span>{{ content.about.remote[activeLanguage] }}</span>
+          </div>
+
+          <div class="about__fact">
+            <img src="/img/about/relocate.png" alt="" aria-hidden="true" />
+            <span>{{ content.about.relocate[activeLanguage] }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about__right">
+        <p>{{ content.about.paragraphOne[activeLanguage] }}</p>
+
+        <p>{{ content.about.paragraphTwo[activeLanguage] }}</p>
+
+        <a class="btn btn--outline" href="#contact">
+          {{ content.about.button[activeLanguage] }}
+        </a>
+      </div>
+    </div>
+
+    <div class="decor-circle decor-circle--about-small" aria-hidden="true"></div>
+  </section>
+
+  <section class="skills" id="skills">
+    <div class="skills__inner">
+      <h2 class="section-title">{{ content.skills.title[activeLanguage] }}</h2>
+
+      <div class="skills__grid">
+        @for (skill of skills; track skill.name) {
+          <article class="skill-card">
+            <img
+              [src]="skill.iconPath"
+              [alt]="skill.name"
+              loading="lazy"
+            />
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <div class="projects__inner">
+      <h2 class="section-title">{{ content.projects.title[activeLanguage] }}</h2>
+
+      <p class="projects__intro">
+        {{ content.projects.intro[activeLanguage] }}
+      </p>
+
+      <div class="projects__list">
+        @for (project of projects; track project.id; let index = $index) {
+          <article
+            class="project-card"
+            [class.project-card--reverse]="index % 2 === 1"
+          >
+            <a
+              class="project-card__preview"
+              [href]="project.liveUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="project.title + ' live öffnen'"
+            >
+              <img
+                [src]="project.imagePath"
+                [alt]="project.imageAlt[activeLanguage]"
+                loading="lazy"
+              />
+            </a>
+
+            <div class="project-card__content">
+              <h3>{{ project.title }}</h3>
+              <p class="project-card__tech">{{ project.technologies }}</p>
+              <p class="project-card__description">
+                {{ project.description[activeLanguage] }}
+              </p>
+
+              <div class="project-card__actions">
+                <a
+                  class="btn btn--primary"
+                  [href]="project.liveUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ content.projects.live[activeLanguage] }}
+                </a>
+
+                <a
+                  class="btn btn--outline"
+                  [href]="project.githubUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ content.projects.github[activeLanguage] }}
+                </a>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+
+    <div class="decor-circle decor-circle--projects-one" aria-hidden="true"></div>
+    <div class="decor-circle decor-circle--projects-two" aria-hidden="true"></div>
+  </section>
+
+  <section class="references" id="references">
+    <div class="references__inner">
+      <h2>{{ content.references.title[activeLanguage] }}</h2>
+      <p class="references__subtitle">{{ content.references.subtitle[activeLanguage] }}</p>
+
+      <div class="references__grid">
+        @for (reference of references; track reference.name) {
+          <article class="reference-card">
+            <h3>{{ reference.name }}</h3>
+            <p class="reference-card__project">{{ reference.project }}</p>
+            <p class="reference-card__quote">“{{ reference.quote[activeLanguage] }}”</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact__inner">
+      <div class="contact__content">
+        <h2 class="section-title">{{ content.contact.title[activeLanguage] }}</h2>
+
+        <h3>{{ content.contact.subtitle[activeLanguage] }}</h3>
+
+        <p>{{ content.contact.paragraph[activeLanguage] }}</p>
+
+        <p class="contact__highlight">
+          {{ content.contact.highlight[activeLanguage] }}
+          <strong>{{ content.contact.highlightLink[activeLanguage] }}</strong>
+        </p>
+      </div>
+
+      <form
+        class="contact__form"
+        [formGroup]="contactForm"
+        (ngSubmit)="submitContactForm()"
+        novalidate
+      >
+        <label>
+          <span>{{ content.contact.namePlaceholder[activeLanguage] }}</span>
+          <input
+            type="text"
+            formControlName="name"
+            [placeholder]="content.contact.namePlaceholder[activeLanguage]"
+            autocomplete="name"
+          />
+
+          <span class="form-error">
+            @if (nameControl?.touched && nameControl?.hasError('required')) {
+              {{ content.contact.errors.nameRequired[activeLanguage] }}
+            } @else if (nameControl?.touched && nameControl?.hasError('minlength')) {
+              {{ content.contact.errors.nameMinLength[activeLanguage] }}
+            }
+          </span>
+        </label>
+
+        <label>
+          <span>{{ content.contact.emailPlaceholder[activeLanguage] }}</span>
+          <input
+            type="email"
+            formControlName="email"
+            [placeholder]="content.contact.emailPlaceholder[activeLanguage]"
+            autocomplete="email"
+          />
+
+          <span class="form-error">
+            @if (emailControl?.touched && emailControl?.hasError('required')) {
+              {{ content.contact.errors.emailRequired[activeLanguage] }}
+            } @else if (emailControl?.touched && emailControl?.hasError('email')) {
+              {{ content.contact.errors.emailInvalid[activeLanguage] }}
+            }
+          </span>
+        </label>
+
+        <label>
+          <span>{{ content.contact.messagePlaceholder[activeLanguage] }}</span>
+          <textarea
+            formControlName="message"
+            rows="7"
+            [placeholder]="content.contact.messagePlaceholder[activeLanguage]"
+          ></textarea>
+
+          <span class="form-error">
+            @if (messageControl?.touched && messageControl?.hasError('required')) {
+              {{ content.contact.errors.messageRequired[activeLanguage] }}
+            } @else if (messageControl?.touched && messageControl?.hasError('minlength')) {
+              {{ content.contact.errors.messageMinLength[activeLanguage] }}
+            }
+          </span>
+        </label>
+
+        <label class="contact__privacy">
+          <input
+            type="checkbox"
+            formControlName="privacyAccepted"
+          />
+
+          <span>
+            @if (activeLanguage === 'de') {
+              Ich habe die
+              <a href="/privacy-policy">Datenschutzerklärung</a>
+              gelesen und stimme der Verarbeitung meiner Daten zu.
+            } @else {
+              I&apos;ve read the
+              <a href="/privacy-policy">privacy policy</a>
+              and agree to the processing of my data as outlined.
+            }
+          </span>
+        </label>
+
+        <span class="form-error form-error--privacy">
+          @if (privacyControl?.touched && privacyControl?.invalid) {
+            {{ content.contact.errors.privacyRequired[activeLanguage] }}
+          }
+        </span>
+
+        <button
+          class="btn btn--outline"
+          type="submit"
+          [disabled]="contactForm.invalid"
+        >
+          {{ content.contact.button[activeLanguage] }}
+        </button>
+
+        <div class="form-guidance" aria-live="polite">
+          @if (contactForm.invalid && !contactSubmitted) {
+            {{ content.contact.guidance[activeLanguage] }}
+          }
+        </div>
+
+        <div class="form-feedback" aria-live="polite">
+          @if (contactSubmitted) {
+            {{ content.contact.success[activeLanguage] }}
+          }
+        </div>
+      </form>
+    </div>
+
+    <div class="decor-circle decor-circle--contact-top" aria-hidden="true"></div>
+    <div class="decor-circle decor-circle--contact-large" aria-hidden="true"></div>
+    <div class="decor-circle decor-circle--contact-small" aria-hidden="true"></div>
+  </section>
+</main>
+
+<app-footer [activeLanguage]="activeLanguage"></app-footer>

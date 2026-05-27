@@ -1,1 +1,91 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;700&family=Poppins:wght@400;500&display=swap');
+
+:root {
+  --color-primary: #5988ff;
+  --color-primary-dark: #0043f0;
+  --color-light-bg: #eaf0ff;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --font-heading: 'Baloo 2', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-button: 'Poppins', sans-serif;
+  --font-legal: 'Open Sans', sans-serif;
+
+  --shadow-soft: 5px 5px 15px rgba(0, 0, 0, 0.15);
+  --radius-button: 10px;
+  --max-content-width: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-black);
+  background: var(--color-white);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 13px 24px;
+  border-radius: var(--radius-button);
+  font-family: var(--font-button);
+  font-size: 23px;
+  line-height: 1.2;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn--primary {
+  color: var(--color-white);
+  background: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn--outline {
+  color: var(--color-primary);
+  background: transparent;
+  border: 2px solid var(--color-primary);
+}
