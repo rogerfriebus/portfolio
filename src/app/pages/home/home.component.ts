@@ -42,8 +42,17 @@ interface Reference {
 export class HomeComponent {
   private formBuilder = inject(FormBuilder);
 
+  private readonly emailJsEndpoint = 'https://api.emailjs.com/api/v1.0/email/send';
+  private readonly emailJsServiceId: string = 'service_229xzf5';
+  private readonly emailJsTemplateId: string = 'template_i1hnq5h';
+  private readonly emailJsPublicKey: string = 'MFtqMTqlNNBUv8oDi';
+  private readonly contactRecipient = 'roger.friebus@gmx.net';
+
   activeLanguage: Language = this.getStoredLanguage();
   contactSubmitted = false;
+  contactSendFailed = false;
+  emailConfigurationMissing = false;
+  isSending = false;
 
   contactForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -180,9 +189,21 @@ export class HomeComponent {
         de: 'Sag hallo ;)',
         en: 'Say hello ;)',
       },
+      sending: {
+        de: 'Wird gesendet...',
+        en: 'Sending...',
+      },
       success: {
-        de: 'Danke. Deine Nachricht wurde erfolgreich vorbereitet.',
-        en: 'Thank you. Your message has been prepared successfully.',
+        de: 'Danke. Deine Nachricht wurde erfolgreich gesendet.',
+        en: 'Thank you. Your message has been sent successfully.',
+      },
+      sendError: {
+        de: 'Leider konnte die Nachricht nicht gesendet werden. Bitte versuche es später erneut oder schreibe direkt an roger.friebus@gmx.net.',
+        en: 'Unfortunately, the message could not be sent. Please try again later or write directly to roger.friebus@gmx.net.',
+      },
+      configError: {
+        de: 'Der E-Mail-Versand ist noch nicht konfiguriert. Bitte EmailJS Service ID, Template ID und Public Key eintragen.',
+        en: 'Email sending is not configured yet. Please add the EmailJS Service ID, Template ID and Public Key.',
       },
       guidance: {
         de: 'Bitte fülle alle Felder aus und akzeptiere die Datenschutzerklärung, um den Button zu aktivieren.',
@@ -335,17 +356,82 @@ export class HomeComponent {
     this.storeLanguage(language);
   }
 
-  submitContactForm() {
+  async submitContactForm() {
     this.contactSubmitted = false;
+    this.contactSendFailed = false;
+    this.emailConfigurationMissing = false;
     this.contactForm.markAllAsTouched();
 
-    if (this.contactForm.invalid) {
+    if (this.contactForm.invalid || this.isSending) {
       return;
     }
 
-    console.log('Contact form submitted:', this.contactForm.value);
-    this.contactSubmitted = true;
-    this.contactForm.reset();
+    if (!this.isEmailServiceConfigured()) {
+      this.emailConfigurationMissing = true;
+      return;
+    }
+
+    this.isSending = true;
+
+    try {
+      await this.sendContactEmail();
+      this.contactSubmitted = true;
+      this.contactForm.reset({
+        name: '',
+        email: '',
+        message: '',
+        privacyAccepted: false,
+      });
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      this.contactSendFailed = true;
+    } finally {
+      this.isSending = false;
+    }
+  }
+
+  private async sendContactEmail() {
+    const formValue = this.contactForm.getRawValue();
+    const name = formValue.name ?? '';
+    const email = formValue.email ?? '';
+    const message = formValue.message ?? '';
+
+    const payload = {
+      service_id: this.emailJsServiceId,
+      template_id: this.emailJsTemplateId,
+      user_id: this.emailJsPublicKey,
+      template_params: {
+        from_name: name,
+        name,
+        from_email: email,
+        email,
+        reply_to: email,
+        message,
+        to_email: this.contactRecipient,
+        language: this.activeLanguage,
+      },
+    };
+
+    const response = await fetch(this.emailJsEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || 'EmailJS request failed');
+    }
+  }
+
+  private isEmailServiceConfigured() {
+    return (
+      this.emailJsServiceId !== 'YOUR_SERVICE_ID' &&
+      this.emailJsTemplateId !== 'YOUR_TEMPLATE_ID' &&
+      this.emailJsPublicKey !== 'YOUR_PUBLIC_KEY'
+    );
   }
 
   private getStoredLanguage(): Language {

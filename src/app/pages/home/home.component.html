@@ -306,13 +306,17 @@
         <button
           class="btn btn--outline"
           type="submit"
-          [disabled]="contactForm.invalid"
+          [disabled]="contactForm.invalid || isSending"
         >
-          {{ content.contact.button[activeLanguage] }}
+          @if (isSending) {
+            {{ content.contact.sending[activeLanguage] }}
+          } @else {
+            {{ content.contact.button[activeLanguage] }}
+          }
         </button>
 
         <div class="form-guidance" aria-live="polite">
-          @if (contactForm.invalid && !contactSubmitted) {
+          @if (contactForm.invalid && !contactSubmitted && !contactSendFailed && !emailConfigurationMissing) {
             {{ content.contact.guidance[activeLanguage] }}
           }
         </div>
@@ -320,6 +324,10 @@
         <div class="form-feedback" aria-live="polite">
           @if (contactSubmitted) {
             {{ content.contact.success[activeLanguage] }}
+          } @else if (emailConfigurationMissing) {
+            {{ content.contact.configError[activeLanguage] }}
+          } @else if (contactSendFailed) {
+            {{ content.contact.sendError[activeLanguage] }}
           }
         </div>
       </form>
