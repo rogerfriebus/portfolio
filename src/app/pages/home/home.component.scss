@@ -37,9 +37,9 @@ main {
 .hero__portrait {
   position: absolute;
   z-index: 2;
-  left: clamp(72px, 7vw, 140px);
+  left: clamp(20px, 4vw, 80px);
   bottom: 0;
-  width: clamp(380px, 31vw, 560px);
+  width: clamp(430px, 35vw, 640px);
   height: auto;
   object-fit: contain;
   object-position: center bottom;
