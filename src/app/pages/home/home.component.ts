@@ -25,6 +25,7 @@ interface Project {
   imageAlt: LocalizedText;
   liveUrl: string;
   githubUrl: string;
+  isComingSoon?: boolean;
 }
 
 interface Reference {
@@ -140,6 +141,14 @@ export class HomeComponent {
       github: {
         de: 'Github',
         en: 'Github',
+      },
+      liveComingSoon: {
+        de: 'Live kommt später',
+        en: 'Live coming soon',
+      },
+      githubComingSoon: {
+        de: 'Github kommt später',
+        en: 'Github coming soon',
       },
     },
     references: {
@@ -269,8 +278,9 @@ export class HomeComponent {
         de: 'Screenshot des Projekts Join',
         en: 'Screenshot of the Join project',
       },
-      liveUrl: '#',
-      githubUrl: '#',
+      liveUrl: '',
+      githubUrl: '',
+      isComingSoon: true,
     },
     {
       id: 'pollo-loco',
@@ -286,8 +296,8 @@ export class HomeComponent {
         de: 'Screenshot des Projekts Pollo Loco',
         en: 'Screenshot of the Pollo Loco project',
       },
-      liveUrl: '#',
-      githubUrl: 'https://github.com/rogerfriebus/el-pollo-loco.git',
+      liveUrl: 'https://pollo-loco.roger-friebus.de',
+      githubUrl: 'https://github.com/rogerfriebus/el-pollo-loco',
     },
     {
       id: 'pokedex',
@@ -303,8 +313,8 @@ export class HomeComponent {
         de: 'Screenshot des Projekts Pokédex',
         en: 'Screenshot of the Pokédex project',
       },
-      liveUrl: '#',
-      githubUrl: 'https://github.com/rogerfriebus/pokedex.git',
+      liveUrl: 'https://pokedex.roger-friebus.de',
+      githubUrl: 'https://github.com/rogerfriebus/pokedex',
     },
   ];
 

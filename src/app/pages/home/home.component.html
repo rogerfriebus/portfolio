@@ -137,19 +137,32 @@
             class="project-card"
             [class.project-card--reverse]="index % 2 === 1"
           >
-            <a
-              class="project-card__preview"
-              [href]="project.liveUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-              [attr.aria-label]="project.title + ' live öffnen'"
-            >
-              <img
-                [src]="project.imagePath"
-                [alt]="project.imageAlt[activeLanguage]"
-                loading="lazy"
-              />
-            </a>
+            @if (project.isComingSoon) {
+              <div
+                class="project-card__preview"
+                [attr.aria-label]="project.title + ' Vorschau'"
+              >
+                <img
+                  [src]="project.imagePath"
+                  [alt]="project.imageAlt[activeLanguage]"
+                  loading="lazy"
+                />
+              </div>
+            } @else {
+              <a
+                class="project-card__preview"
+                [href]="project.liveUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                [attr.aria-label]="project.title + ' live öffnen'"
+              >
+                <img
+                  [src]="project.imagePath"
+                  [alt]="project.imageAlt[activeLanguage]"
+                  loading="lazy"
+                />
+              </a>
+            }
 
             <div class="project-card__content">
               <h3>{{ project.title }}</h3>
@@ -159,23 +172,33 @@
               </p>
 
               <div class="project-card__actions">
-                <a
-                  class="btn btn--primary"
-                  [href]="project.liveUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {{ content.projects.live[activeLanguage] }}
-                </a>
+                @if (project.isComingSoon) {
+                  <button class="btn btn--outline" type="button" disabled>
+                    {{ content.projects.liveComingSoon[activeLanguage] }}
+                  </button>
 
-                <a
-                  class="btn btn--outline"
-                  [href]="project.githubUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {{ content.projects.github[activeLanguage] }}
-                </a>
+                  <button class="btn btn--outline" type="button" disabled>
+                    {{ content.projects.githubComingSoon[activeLanguage] }}
+                  </button>
+                } @else {
+                  <a
+                    class="btn btn--primary"
+                    [href]="project.liveUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {{ content.projects.live[activeLanguage] }}
+                  </a>
+
+                  <a
+                    class="btn btn--outline"
+                    [href]="project.githubUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {{ content.projects.github[activeLanguage] }}
+                  </a>
+                }
               </div>
             </div>
           </article>
