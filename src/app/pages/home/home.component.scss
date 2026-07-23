@@ -411,6 +411,14 @@ main {
   line-height: 1.25;
 }
 
+.project-card__role-title {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
 .project-card__actions {
   display: flex;
   gap: 24px;

@@ -171,6 +171,16 @@
                 {{ project.description[activeLanguage] }}
               </p>
 
+              @if (project.role) {
+                <p class="project-card__role-title">
+                  {{ content.projects.roleTitle[activeLanguage] }}
+                </p>
+
+                <p class="project-card__description">
+                  {{ project.role[activeLanguage] }}
+                </p>
+              }
+
               <div class="project-card__actions">
                 @if (project.isComingSoon) {
                   <button class="btn btn--outline" type="button" disabled>

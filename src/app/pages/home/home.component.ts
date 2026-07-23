@@ -20,6 +20,7 @@ interface Project {
   title: string;
   technologies: string;
   description: LocalizedText;
+  role?: LocalizedText;
   previewLabel: string;
   imagePath: string;
   imageAlt: LocalizedText;
@@ -150,6 +151,10 @@ export class HomeComponent {
         de: 'Github kommt später',
         en: 'Github coming soon',
       },
+      roleTitle: {
+        de: 'Meine Rolle',
+        en: 'My role',
+      },
     },
     references: {
       title: {
@@ -267,10 +272,14 @@ export class HomeComponent {
     {
       id: 'join',
       title: 'Join',
-      technologies: 'Angular | TypeScript | HTML | CSS | Firebase',
+      technologies: 'Angular | TypeScript | HTML | SCSS | Supabase',
       description: {
-        de: 'Task-Manager inspiriert vom Kanban-System. Aufgaben erstellen, organisieren, per Drag and Drop verschieben und Nutzern sowie Kategorien zuordnen.',
-        en: 'Task manager inspired by the Kanban system. Create and organize tasks using drag and drop functions, assign users and categories.',
+        de: 'Join ist eine Kanban-basierte Aufgabenverwaltung, entwickelt mit Angular und TypeScript. Das Projekt umfasst Authentifizierung, geschützte Routen, Aufgabenverwaltung, Kontakte, Subtasks, Drag-and-Drop-Workflows, responsive Layouts und Demodaten auf Basis von Supabase.',
+        en: 'Join is a Kanban-based task management application built with Angular and TypeScript. The project includes authentication, protected routes, task management, contacts, subtasks, drag-and-drop workflows, responsive layouts and Supabase-backed demo data.',
+      },
+      role: {
+        de: 'Mein Schwerpunkt im Projekt lag auf Planung, technischer Struktur und Datenintegration. Ich habe die Sprint-Struktur vorbereitet, die Tickets erstellt und geschärft, das Datenbank-Setup umgesetzt, die zentralen Services für Aufgaben, Kontakte und Authentifizierung gebaut und das Team bei Integration und Debugging unterstützt.',
+        en: 'My role in the project focused on planning, technical structure and data integration. I prepared the sprint structure, created and refined the task tickets, implemented the database setup, built the core services for tasks, contacts and authentication, and supported the team during integration and debugging.',
       },
       previewLabel: 'Join',
       imagePath: '/img/projects/join.png',
@@ -278,9 +287,8 @@ export class HomeComponent {
         de: 'Screenshot des Projekts Join',
         en: 'Screenshot of the Join project',
       },
-      liveUrl: '',
-      githubUrl: '',
-      isComingSoon: true,
+      liveUrl: 'https://join.roger-friebus.de',
+      githubUrl: 'https://github.com/rogerfriebus/join',
     },
     {
       id: 'pollo-loco',
@@ -319,6 +327,22 @@ export class HomeComponent {
   ];
 
   references: Reference[] = [
+    {
+      name: 'Kevin',
+      project: 'Project Join',
+      quote: {
+        de: 'Roger hat die Planung unseres Join-Projekts übernommen und von Anfang an eine klare Struktur und einen effizienten Workflow geschaffen. Seine sorgfältige Vorbereitung der Tickets hat dem Team eine starke Grundlage für die Zusammenarbeit gegeben. Außerdem war er für das Datenbank-Setup und die Services verantwortlich, die mit den Daten arbeiten. Dadurch ist eine stabile und gut strukturierte Schnittstelle entstanden, auf der ich meine eigene Arbeit effizient aufbauen konnte. Rogers strukturierte Arbeitsweise, seine technische Sicherheit bei Services und backendnaher Architektur sowie sein lösungsorientierter Ansatz haben wesentlich zum Erfolg des Projekts beigetragen.',
+        en: 'Roger took over the planning of our Join project and created a clear structure and efficient workflow from the beginning. His careful preparation of tickets gave the team a strong foundation for collaboration. He was also responsible for the database setup and the services that interact with the data. This created a stable and well-structured interface that allowed me to build my own work efficiently on top of it. Roger’s structured way of working, technical confidence with services and backend-related architecture, and solution-oriented approach contributed significantly to the success of the project.',
+      },
+    },
+    {
+      name: 'Marco',
+      project: 'Project Join',
+      quote: {
+        de: 'Die Zusammenarbeit mit Roger in unserem Join-Projekt war durchweg positiv. Er hat zuverlässig, strukturiert und mit einem starken Fokus auf Lösungen gearbeitet. Absprachen wurden eingehalten, und bei technischen Fragen konnten wir immer offen sprechen und uns gegenseitig unterstützen. Ich würde jederzeit wieder mit ihm in einem Projektteam arbeiten.',
+        en: 'Working with Roger on our Join project was consistently positive. He worked reliably, in a structured way and with a strong focus on solutions. Agreements were kept, and when technical questions came up, we were always able to discuss them openly and support each other. I would gladly work with him again in a project team.',
+      },
+    },
     {
       name: 'James Rugman',
       project: 'Project Join',
