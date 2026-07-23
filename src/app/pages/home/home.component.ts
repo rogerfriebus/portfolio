@@ -343,30 +343,6 @@ export class HomeComponent {
         en: 'Working with Roger on our Join project was consistently positive. He worked reliably, in a structured way and with a strong focus on solutions. Agreements were kept, and when technical questions came up, we were always able to discuss them openly and support each other. I would gladly work with him again in a project team.',
       },
     },
-    {
-      name: 'James Rugman',
-      project: 'Project Join',
-      quote: {
-        de: 'Roger ist zuverlässig und freundlich. Er arbeitet strukturiert und schreibt klaren Code. Ich empfehle ihn sehr als Kollegen.',
-        en: 'Roger is a reliable and friendly person. He works in a structured way and writes clear code. I highly recommend him as a colleague.',
-      },
-    },
-    {
-      name: 'Evelyn Marx',
-      project: 'Project Pokédex',
-      quote: {
-        de: 'Roger arbeitet fokussiert, zuverlässig und lösungsorientiert. Besonders seine strukturierte Vorgehensweise macht die Zusammenarbeit angenehm.',
-        en: 'Roger works focused, reliably and solution-oriented. His structured approach makes collaboration very pleasant.',
-      },
-    },
-    {
-      name: 'Noah Müller',
-      project: 'Project Pollo Loco',
-      quote: {
-        de: 'Roger hat Inhalte im Team entwickelt, formatiert und geliefert. Er ist zuverlässig und freundlich.',
-        en: 'Roger developed, formatted and delivered content in collaboration with the team. He is reliable and friendly.',
-      },
-    },
   ];
 
   get nameControl() {

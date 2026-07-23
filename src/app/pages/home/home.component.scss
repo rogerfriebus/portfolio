@@ -456,7 +456,7 @@ main {
 
 .references__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: clamp(32px, 6vw, 90px);
   text-align: left;
 }
