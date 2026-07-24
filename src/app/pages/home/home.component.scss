@@ -5,6 +5,7 @@ main {
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
   display: grid;
   grid-template-columns: 48% 52%;
@@ -17,6 +18,7 @@ main {
   position: relative;
   align-self: stretch;
   min-height: calc(100vh - 104px);
+  min-height: calc(100dvh - 104px);
 }
 
 .hero__circle {
@@ -78,8 +80,8 @@ main {
   position: absolute;
   z-index: 4;
   left: 71%;
-  top: clamp(590px, 73vh, 700px);
-  bottom: auto;
+  top: auto;
+  bottom: clamp(48px, 8vh, 96px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -363,11 +365,18 @@ main {
   padding: 0;
   margin: 0;
   line-height: 0;
-  transition: transform 180ms ease;
+  transition: transform 220ms ease;
 }
 
-.project-card__preview:hover {
-  transform: translateY(-6px);
+.project-card__preview:hover,
+.project-card__preview:focus-visible {
+  transform: translateY(-8px);
+}
+
+.project-card__preview:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 8px;
+  border-radius: 6px;
 }
 
 .project-card__preview img {
@@ -382,6 +391,13 @@ main {
   background: transparent !important;
   padding: 0;
   margin: 0;
+  transition: transform 260ms ease, filter 260ms ease;
+}
+
+.project-card__preview:hover img,
+.project-card__preview:focus-visible img {
+  transform: scale(1.02);
+  filter: drop-shadow(0 18px 32px rgba(0, 67, 240, 0.22));
 }
 
 .project-card__content {
@@ -657,6 +673,13 @@ main {
   right: 8%;
   bottom: 55px;
   z-index: 1;
+}
+
+@media (min-width: 1700px) {
+  .hero {
+    padding-left: calc((100% - 1500px) / 2);
+    padding-right: calc((100% - 1500px) / 2);
+  }
 }
 
 @media (max-width: 1280px) {
@@ -959,5 +982,26 @@ main {
   .decor-circle--contact-small {
     right: 10%;
     bottom: 110px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card__preview,
+  .project-card__preview img,
+  .skill-card,
+  .skill-card img,
+  .hero__socials a {
+    transition: none;
+  }
+
+  .project-card__preview:hover,
+  .project-card__preview:focus-visible,
+  .project-card__preview:hover img,
+  .project-card__preview:focus-visible img,
+  .skill-card:hover,
+  .skill-card:focus-within,
+  .skill-card:hover img,
+  .skill-card:focus-within img {
+    transform: none;
   }
 }
