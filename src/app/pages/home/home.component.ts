@@ -1,9 +1,35 @@
 import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { HeaderComponent } from '../../layout/header/header.component';
 import { FooterComponent } from '../../layout/footer/footer.component';
 
 type Language = 'de' | 'en';
+
+/**
+ * Strikte E-Mail-Validierung: gültig nur bei vollständigem Format
+ * `lokaler-teil@domain.tld` mit TLD von mindestens 2 Zeichen.
+ * Zwischenzustände wie "klaus@test" oder "klaus@test." bleiben ungültig.
+ * Leere Eingabe wird der `required`-Validierung überlassen.
+ */
+export function strictEmailValidator(
+  control: AbstractControl
+): ValidationErrors | null {
+  const value = control.value;
+
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)*\.[^\s@]{2,}$/;
+
+  return emailPattern.test(value) ? null : { email: true };
+}
 
 interface LocalizedText {
   de: string;
@@ -58,7 +84,7 @@ export class HomeComponent {
 
   contactForm = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, strictEmailValidator]],
     message: ['', [Validators.required, Validators.minLength(10)]],
     privacyAccepted: [false, [Validators.requiredTrue]],
   });
