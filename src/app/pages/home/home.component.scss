@@ -220,12 +220,24 @@ main {
   min-width: 0;
   font-size: 18px;
   line-height: 1.15;
+  transition: transform 200ms ease, color 200ms ease;
+}
+
+.about__fact:hover {
+  transform: translateY(-3px);
+  color: var(--color-primary-dark);
 }
 
 .about__fact img {
   width: 42px;
   height: 42px;
   object-fit: contain;
+  transition: transform 200ms ease, filter 200ms ease;
+}
+
+.about__fact:hover img {
+  transform: scale(1.08);
+  filter: drop-shadow(0 8px 14px rgba(0, 67, 240, 0.22));
 }
 
 .about__fact span {
@@ -990,6 +1002,8 @@ main {
   .project-card__preview img,
   .skill-card,
   .skill-card img,
+  .about__fact,
+  .about__fact img,
   .hero__socials a {
     transition: none;
   }
@@ -1001,7 +1015,9 @@ main {
   .skill-card:hover,
   .skill-card:focus-within,
   .skill-card:hover img,
-  .skill-card:focus-within img {
+  .skill-card:focus-within img,
+  .about__fact:hover,
+  .about__fact:hover img {
     transform: none;
   }
 }
